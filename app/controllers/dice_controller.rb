@@ -1,13 +1,15 @@
 class DiceController < ApplicationController
 
-  def one_six
+  def dice_roll
+    @num_dice = params.fetch("number_of_dice")
+    @num_faces = params.fetch("how_many_sides")
     @array_of_rolls = Array.new
 
-    1.times do
-      @array_of_rolls.push(rand(6) + 1)
+    @num_dice.to_i.times do
+      @array_of_rolls.push(rand(@num_faces.to_i) + 1)
     end
 
-    render({:template => "dice_templates/one_six.html.erb"})
+    render({:template => "dice_templates/dice_results.html.erb"})
   end
 
   def two_six
